@@ -7,6 +7,7 @@ import com.catt.resteasy.exception.RtException;
 import com.catt.resteasy.annotation.Token;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     private JwtUtils jwtUtils;
+
 
     public static final String USER_KEY = "userId";
 

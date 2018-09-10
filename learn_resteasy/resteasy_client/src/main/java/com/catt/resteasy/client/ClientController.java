@@ -4,6 +4,7 @@ import com.catt.resteasy.api.ApiService;
 import com.catt.resteasy.api.IPranApiService;
 import com.catt.resteasy.api.RestController;
 import com.catt.resteasy.api.RestRequestSpringService;
+import com.catt.resteasy.interceptor.TokenInterceptor;
 import com.catt.resteasy.pojo.RestFormRequest;
 import com.catt.resteasy.pojo.RestRequest;
 import com.catt.resteasy.pojo.ResultBean;
@@ -11,6 +12,11 @@ import com.catt.resteasy.util.JsonUtil;
 import org.jboss.resteasy.client.ClientExecutor;
 import org.jboss.resteasy.client.ProxyFactory;
 import org.jboss.resteasy.client.core.executors.ApacheHttpClient4Executor;
+import org.jboss.resteasy.core.interception.InterceptorRegistry;
+import org.jboss.resteasy.spi.ResteasyProviderFactory;
+import org.jboss.resteasy.spi.interception.ClientExecutionInterceptor;
+
+import java.net.URI;
 
 /**
  * @author zhangmaolin
@@ -25,7 +31,17 @@ public class ClientController {
 //        test2();
         //test3();
         ClientExecutor executor = new ApacheHttpClient4Executor();
-        RestRequestSpringService service = ProxyFactory.create(RestRequestSpringService.class, url, executor);
+
+        ResteasyProviderFactory factory = ResteasyProviderFactory.getInstance();
+
+        InterceptorRegistry<ClientExecutionInterceptor> registry = factory.getClientExecutionInterceptorRegistry();
+
+        registry.register(new TokenInterceptor());
+
+        URI uri = URI.create(url);
+
+//        RestRequestSpringService service = ProxyFactory.create(RestRequestSpringService.class, url, executor);
+        RestRequestSpringService service = ProxyFactory.create(RestRequestSpringService.class, uri, executor, factory);
         ResultBean resultBean = service.test2();
         System.out.println(resultBean.getData());
 

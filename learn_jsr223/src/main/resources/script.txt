@@ -1,0 +1,12 @@
+head script
+<javascript>
+var ability = {
+    VLAN_SLAVE : 'vlan_slave',
+    NOVLAN_SLAVE : 'novlan_slave',
+    VLAN_NOSLAVE : 'vlan_noslave',
+    NOVLAN_NOSLAVE : 'novlan_noslave'
+}
+</javascript>
+{0}
+body script
+end script

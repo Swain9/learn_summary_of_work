@@ -12,6 +12,7 @@
         <module>project_jgroups</module>
         <module>learn_spring3_2_2</module>
         <module>learn_resteasy</module>
+        <module>learn_jsr223</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -132,7 +133,13 @@
                 <version>3.4</version>
             </dependency>
 
-
+            <!--测试 <junit.version>4.12</junit.version>-->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

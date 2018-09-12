@@ -2,14 +2,12 @@ package com.catt.resteasy.interceptor;
 
 
 import com.catt.ipran.Claims;
-import com.catt.resteasy.util.JwtUtils;
-import com.catt.resteasy.exception.RtException;
 import com.catt.resteasy.annotation.Token;
+import com.catt.resteasy.exception.RtException;
+import com.catt.resteasy.util.JwtUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -57,7 +55,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 
         //设置userId到request里，后续根据userId，获取用户信息
         request.setAttribute(USER_KEY, Long.parseLong(claims.getSubject()));
-
+        response.setHeader("Content-Type","");
         return true;
     }
 }

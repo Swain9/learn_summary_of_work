@@ -1,6 +1,7 @@
 package com.catt.resteasy.util;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 
 /**
  * @author zhangmaolin
@@ -29,6 +30,18 @@ public class JsonUtil {
         try {
             return mapper.readValue(json, clazz);
         } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static <T> T jsonToObj(String json, TypeReference typeReference) {
+        if (json == null || "".equals(json.trim()) || typeReference == null) {
+            return null;
+        }
+        try {
+            return mapper.readValue(json, typeReference);
+        } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }

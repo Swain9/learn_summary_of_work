@@ -1,5 +1,6 @@
 package com.catt.resteasy.api;
 
+import com.catt.resteasy.pojo.JacksonBean;
 import com.catt.resteasy.pojo.ResultBean;
 import com.catt.resteasy.test.ResponseList;
 import com.catt.resteasy.test.common.RequestParam;
@@ -53,4 +54,27 @@ public interface RestRequestSpringService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("createVpwsVplsVpnBiz")
     public ResponseResult<VpwsVplsResult> createVpwsVplsVpnBiz(RequestParam<VpwsVplsParam> requestParam);
+
+    /**
+     * 测试客户端异常拦截器
+     *
+     * @return
+     */
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("test4")
+    public ResultBean test4();
+
+    /**
+     * 测试
+     *
+     * @param jacksonBean
+     * @return
+     */
+    @POST
+    @Produces(MediaType.APPLICATION_FORM_URLENCODED)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("test5")
+    public String test5(JacksonBean jacksonBean);
+
 }

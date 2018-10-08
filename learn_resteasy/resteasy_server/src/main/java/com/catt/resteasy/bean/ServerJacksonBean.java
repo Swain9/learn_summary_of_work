@@ -1,0 +1,42 @@
+package com.catt.resteasy.bean;
+
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+/**
+ * @author zhangmaolin
+ * @date 2018-09-28 18:38
+ * @since 0.0.1
+ */
+public class ServerJacksonBean {
+
+    @JsonProperty(value = "USER_NAME")
+    private String userName;
+    @JsonProperty(value = "USER_AGE")
+    private Integer userAge;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public Integer getUserAge() {
+        return userAge;
+    }
+
+    public void setUserAge(Integer userAge) {
+        this.userAge = userAge;
+    }
+
+    @Override
+    public String toString() {
+        return "JacksonBean{" +
+                "userName='" + userName + '\'' +
+                ", userAge=" + userAge +
+                '}';
+    }
+
+}

@@ -46,6 +46,7 @@ public class TokenInterceptor implements ClientExecutionInterceptor {
             streamFactory.performReleaseConnection();
         }
         //response.setReturnType(ResponseResult.class);
+        System.out.println("=========================================================================================");
 
         return response;
 

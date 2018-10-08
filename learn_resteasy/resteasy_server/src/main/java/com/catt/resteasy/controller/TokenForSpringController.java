@@ -1,17 +1,21 @@
 package com.catt.resteasy.controller;
 
 import com.catt.resteasy.annotation.Token;
+import com.catt.resteasy.bean.ServerJacksonBean;
+import com.catt.resteasy.pojo.JacksonBean;
 import com.catt.resteasy.pojo.ResultBean;
 import com.catt.resteasy.test.ResponseList;
 import com.catt.resteasy.test.common.RequestParam;
 import com.catt.resteasy.test.common.ResponseResult;
 import com.catt.resteasy.test.vpwsvpls.VpwsVplsParam;
 import com.catt.resteasy.test.vpwsvpls.VpwsVplsResult;
+import com.catt.resteasy.util.JsonUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,4 +71,23 @@ public class TokenForSpringController {
 
     }
 
+    /**
+     * 测试客户端异常拦截器
+     *
+     * @return
+     */
+    @RequestMapping("/test4")
+    @ResponseBody
+    public ResultBean test4(HttpServletResponse response) {
+        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        return ResultBean.error();
+    }
+
+    @RequestMapping("/test5")
+    @ResponseBody
+    public String test5(@RequestBody JacksonBean jacksonBean) {
+        String json = JsonUtil.objToJson(jacksonBean);
+        System.out.println(json);
+        return json;
+    }
 }

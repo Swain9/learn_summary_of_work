@@ -5,8 +5,10 @@ import com.catt.resteasy.api.IPranApiService;
 import com.catt.resteasy.api.RestController;
 import com.catt.resteasy.api.RestRequestSpringService;
 import com.catt.resteasy.interceptor.BodyInterceptor;
+import com.catt.resteasy.interceptor.ExceptionInterceptor;
 import com.catt.resteasy.interceptor.NewHttpExecute;
 import com.catt.resteasy.interceptor.TokenInterceptor;
+import com.catt.resteasy.pojo.JacksonBean;
 import com.catt.resteasy.pojo.RestFormRequest;
 import com.catt.resteasy.pojo.RestRequest;
 import com.catt.resteasy.pojo.ResultBean;
@@ -24,6 +26,7 @@ import org.apache.http.protocol.DefaultedHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.jboss.resteasy.client.ClientExecutor;
 import org.jboss.resteasy.client.ProxyFactory;
+import org.jboss.resteasy.client.core.ClientErrorInterceptor;
 import org.jboss.resteasy.client.core.executors.ApacheHttpClient4Executor;
 import org.jboss.resteasy.core.interception.InterceptorRegistry;
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
@@ -44,11 +47,68 @@ public class ClientController {
 
     public static void main(String[] args) {
         //test1();
-//        test2();
+        //test2();
         //test3();
         //test4();
-        //test5();
-        createVpwsVplsVpnBiz();
+        //测试多次调用
+//        test5();
+//        test5();
+        //createVpwsVplsVpnBiz();
+        //test6();
+
+        ClientExecutor executor = new ApacheHttpClient4Executor();
+
+        ResteasyProviderFactory factory = ResteasyProviderFactory.getInstance();
+
+        InterceptorRegistry<ClientExecutionInterceptor> registry1 = factory.getClientExecutionInterceptorRegistry();
+        registry1.register(new TokenInterceptor());
+
+        InterceptorRegistry<MessageBodyReaderInterceptor> registry2 = factory.getClientMessageBodyReaderInterceptorRegistry();
+        registry2.register(new BodyInterceptor());
+
+        List<ClientErrorInterceptor> registry3 = factory.getClientErrorInterceptors();
+        registry3.add(new ExceptionInterceptor());
+
+
+        URI uri = URI.create(url);
+
+        RestRequestSpringService service = ProxyFactory.create(RestRequestSpringService.class, uri, executor, factory);
+        try {
+            JacksonBean jacksonBean = new JacksonBean();
+            jacksonBean.setUserName("张三");
+            jacksonBean.setUserAge(11);
+            String resultBean = service.test5(jacksonBean);
+            System.out.println(resultBean);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private static void test6() {
+        ClientExecutor executor = new ApacheHttpClient4Executor();
+
+        ResteasyProviderFactory factory = ResteasyProviderFactory.getInstance();
+
+        InterceptorRegistry<ClientExecutionInterceptor> registry1 = factory.getClientExecutionInterceptorRegistry();
+        registry1.register(new TokenInterceptor());
+
+        InterceptorRegistry<MessageBodyReaderInterceptor> registry2 = factory.getClientMessageBodyReaderInterceptorRegistry();
+        registry2.register(new BodyInterceptor());
+
+        List<ClientErrorInterceptor> registry3 = factory.getClientErrorInterceptors();
+        registry3.add(new ExceptionInterceptor());
+
+
+        URI uri = URI.create(url);
+
+        RestRequestSpringService service = ProxyFactory.create(RestRequestSpringService.class, uri, executor, factory);
+        try {
+            ResultBean resultBean = service.test4();
+            System.out.println(resultBean);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void createVpwsVplsVpnBiz() {
@@ -123,6 +183,8 @@ public class ClientController {
         InterceptorRegistry<ClientExecutionInterceptor> registry = factory.getClientExecutionInterceptorRegistry();
 
         registry.register(new TokenInterceptor());
+        //todo 异常拦截器
+        factory.addClientErrorInterceptor(new ExceptionInterceptor());
 
         URI uri = URI.create(url);
 

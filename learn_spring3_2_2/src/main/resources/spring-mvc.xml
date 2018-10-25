@@ -12,5 +12,11 @@
         替我们显示的配置了最新版的注解的处理器映射器和处理器适配器
     -->
     <mvc:annotation-driven />
-
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 真正的页面路径 =  前缀 + 去掉后缀名的页面名称 + 后缀 -->
+        <!-- 前缀 -->
+        <property name="prefix" value="/WEB-INF/"/>
+        <!-- 后缀 -->
+        <property name="suffix" value=".jsp"/>
+    </bean>
 </beans>

@@ -30,7 +30,7 @@
             / 			拦截所有但是不包括.jsp
             /* 			拦截所有包括.jsp
         -->
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
     <!--配置POST请求乱码过滤器-->
     <filter>

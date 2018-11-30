@@ -9,3 +9,8 @@ out
 gen
 learn_resteasy/resteasy_common/target/
 learn_jsr223/target/
+learn_resteasy/resteasy_client/target/
+learn_resteasy/resteasy_server/target/
+learn_spring3_2_2/target/
+learn_jgroups/target/
+project_jgroups/target/

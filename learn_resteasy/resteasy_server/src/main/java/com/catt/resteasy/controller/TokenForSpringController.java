@@ -90,4 +90,12 @@ public class TokenForSpringController {
         System.out.println(json);
         return json;
     }
+    @RequestMapping("/test6")
+    @ResponseBody
+    public String test6(JacksonBean jacksonBean, String name) {
+        String json = JsonUtil.objToJson(jacksonBean);
+        System.out.println(json);
+        System.out.println(name);
+        return json;
+    }
 }

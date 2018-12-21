@@ -61,7 +61,7 @@ public class SimpleChat extends ReceiverAdapter {
             state.addAll(list);
         }
         System.out.println(list.size() + " messages in chat history):");
-        list.forEach(System.out::println);
+        //list.forEach(System.out::println);
     }
 
     private void eventLoop() {

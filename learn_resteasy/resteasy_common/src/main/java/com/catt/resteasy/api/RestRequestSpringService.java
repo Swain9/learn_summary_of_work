@@ -72,9 +72,15 @@ public interface RestRequestSpringService {
      * @return
      */
     @POST
-    @Produces(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("test5")
     public String test5(JacksonBean jacksonBean);
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("test6")
+    public String test6(JacksonBean jacksonBean, String name);
 
 }

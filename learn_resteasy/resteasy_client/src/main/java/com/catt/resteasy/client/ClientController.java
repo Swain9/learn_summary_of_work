@@ -43,7 +43,7 @@ import java.util.List;
  * @since 2018-08-15 17:11
  */
 public class ClientController {
-    private static String url = "http://localhost:8080/";
+    private static String url = "http://localhost:8180/";
 
     public static void main(String[] args) {
         //test1();
@@ -75,9 +75,9 @@ public class ClientController {
         RestRequestSpringService service = ProxyFactory.create(RestRequestSpringService.class, uri, executor, factory);
         try {
             JacksonBean jacksonBean = new JacksonBean();
-            jacksonBean.setUserName("张三");
+            jacksonBean.setUserName("bbbbbb");
             jacksonBean.setUserAge(11);
-            String resultBean = service.test5(jacksonBean);
+            String resultBean = service.test6(jacksonBean,"aaaaa");
             System.out.println(resultBean);
         } catch (Exception e) {
             e.printStackTrace();
